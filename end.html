@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ที่รักของเค้า</title>
+  <style>
+    body {margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: pink;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: pink;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      cursor: none; /* ซ่อนเมาส์ปกติ */
+    }
+
+    h1 {
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.7;
+      }
+    }
+     button {
+      position: absolute;
+      padding: 12px 24px;
+      background: white;
+      color: #e91e63;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #f8bbd0;
+    }
+    .light {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+      mix-blend-mode: screen;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s ease-out;
+      z-index: 20;
+    }
+  </style>
+</head>
+<body>
+  <div class="flex flex-col items-center space-y-2">
+  <h1>ดีกันแล้วนะคะ นัทธพลคนนี้ ♥ ณิชานันท์ มากๆนะคะ <h1>
+  
+</div>
+
+  <script>
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.textContent = "🌸"; // ใช้อีโมจิดอกไม้
+
+      flower.style.left = Math.random() * 100 + "vw"; 
+      flower.style.animationDuration = (3 + Math.random() * 5) + "s"; // เวลาในการร่วง
+
+      document.body.appendChild(flower);
+
+      // ลบออกเมื่อร่วงถึงล่าง
+      setTimeout(() => {
+        flower.remove();
+      }, 8000);
+    }
+
+    // ปล่อยดอกไม้ทุก 300ms
+    setInterval(createFlower, 300);
+    // --- แสงตามเมาส์ ---
+    const light = document.createElement("div");
+    light.classList.add("light");
+    document.body.appendChild(light);
+
+    document.addEventListener("mousemove", e => {
+      light.style.left = e.pageX + "px";
+      light.style.top = e.pageY + "px";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>อันสุดท้ายแล้วนะคะ</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: pink;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      cursor: none;
+    }
+
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.7;
+      }
+    }
+
+    .light {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+      mix-blend-mode: screen;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s ease-out;
+      z-index: 20;
+    }
+
+    .message-container {
+      background: rgba(255, 255, 255, 0.9);
+      color: #e91e63;
+      border-radius: 15px;
+      padding: 20px;
+      width: 350px;
+      text-align: center;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 2s ease, padding 2s ease;
+    }
+
+    .message-container.show {
+      max-height: 300px; /* ความสูงสูงสุดเมื่อเลื่อนลง */
+      padding: 20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #fff;
+      color: #e91e63;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #f8bbd0;
+    }
+  </style>
+</head>
+<body>
+  <!-- กล่องข้อความตรงกลาง -->
+  <div class="message-container" id="messageBox">
+    <!-- ข้อความจะปรากฏที่นี่ -->
+     
+  </div>
+
+
+  <!-- ปุ่มเริ่ม -->
+  <button onclick="startMessage()">เริ่ม</button>
+
+  <script>
+    // --- ดอกไม้ร่วง ---
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.textContent = "🌸";
+      flower.style.left = Math.random() * 100 + "vw"; 
+      flower.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(flower);
+      setTimeout(() => { flower.remove(); }, 8000);
+    }
+    setInterval(createFlower, 300);
+
+    // --- แสงตามเมาส์ ---
+    const light = document.createElement("div");
+    light.classList.add("light");
+    document.body.appendChild(light);
+
+    document.addEventListener("mousemove", e => {
+      light.style.left = e.pageX + "px";
+      light.style.top = e.pageY + "px";
+    });
+
+    // --- ฟังก์ชันเริ่มข้อความ ---
+    function startMessage() {
+      const box = document.getElementById("messageBox");
+      box.textContent = "ที่รักคะเค้าขอโทษนะคะตลอดมาที่ทำตัวไม่ดีใส่เธอ ไม่ได้เข้าใจความรู้สึกที่รักเท่าที่ควร เค้าอยากบอกว่าเค้าอยากทำให้มันดีที่สุดนะคะถึงตอนนี้เค้าจะทำได้ไม่ดี แต่เค้าสัญญาว่าเค้าจะทำให้เธอมีความสุขมากๆจะพยายามทำทุกอย่างให้ดีที่สุด เค้ารักที่รักมากๆจริงๆนะคะไม่เคยรักใครมากเท่าที่รักเลยแล้วคิดว่าเค้าคงไม่รักใครแบบที่รักแล้ว เธอดีกับเค้ามากๆเลยนะคะรักมากๆ นัทธพล รัก ณิชานันท์ นะคะ ";
+      box.classList.add("show");
+    }
+  </script>
+</body>
+</html>
